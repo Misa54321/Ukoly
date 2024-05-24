@@ -1,7 +1,6 @@
 import json
 import requests
 
-
 # Zisk dat z API
 response = requests.get('https://cat-fact.herokuapp.com/facts?animal_type=cat&amount=10')
 data = response.json()
