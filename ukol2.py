@@ -7,15 +7,18 @@ try:
     data = response.json()
  
 # Vypis pouze casti s textem, ktery nas zajima
-    text_facts = [fact["text"] for fact in data]
+    text_facts = {f"{i}": fact["text"] for i, fact in enumerate(data, 1)}
 
-# Zisk ocislovaneho seznamu
-    for i, fact in enumerate(text_facts, 1):
-        print(f"{i}. {fact}")
+# Výpis očíslovaných faktů
+    cat_facts = []
+    for i, fact in text_facts.items():
+        cat_facts.append(f"{i}. {fact}")
 
-# Tvorba souboru s fakty
+    print(cat_facts)
+
+# Tvorba souboru s očíslovanými fakty
     with open('kocici_fakta.json', mode='w', encoding='utf-8') as output_file:
-        json.dump(data, output_file, indent=4)
+        json.dump(cat_facts, output_file, indent=4)
 
 except requests.Timeout:
     print("Jste prilis nedockavi.")
